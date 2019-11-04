@@ -16,30 +16,30 @@ class GameBoard extends Component{
             store: []
         }
     }
-    randomColorSelection(colors) {
-        let keys = Object.keys(colors);
-        while(this.state.store.length <= 4) {
-            var color = colors[keys[ keys.length * Math.random() << 0]];
-            console.log(color);
-            if(this.state.store.indexOf(color) === -1) 
-            this.setState({store: this.state.store.push(color)});
-        }
+    displayRandomColorSelection(colors) {
+        colors.forEach(() => {
+            setTimeout((color)=>{
+                console.log(color);
+            }, 10)
+        });
+        
         //for(var j, x, i = keys.length; i; j = parseInt(Math.random() * i), x = keys[--i], keys[i] = keys[j], keys[j] = x);
         // for (let i=keys.length; i--;) {
         //     var color =  colors[keys.splice(Math.floor(Math.random() * (i + 1)), 1)[0]];
         // }s
         // let color = colors[keys[ keys.length * Math.random() << 0]];
-        console.log(this.state.store);
-        return colors;
+        return this.state.store;
     }
     startGame() {
-        let counter = 1;
-        setInterval(()=>{
-            if(counter <=4 ){
-                this.randomColorSelection(this.state.colors);
-                counter++;
+        let keys = Object.keys(this.state.colors);
+        while(this.state.store.length <= 4) {
+            var color = this.state.colors[keys[ keys.length * Math.random() << 0]];
+            console.log(color);
+            if(this.state.store.indexOf(color) === -1) {
+                this.setState({store: this.state.store.push(color)});
             }
-        }, 750);
+        }
+        this.displayRandomColorSelection(this.state.store);
         }
     render() {
         return (
